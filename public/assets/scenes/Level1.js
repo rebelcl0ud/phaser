@@ -18,8 +18,13 @@ export default class Level1 extends Phaser.Scene {
 	// 		textureURL: '/assets/img/atlas_sprites/sprites.png',
 	// 		atlasURL: '/assets/img/atlas_sprites/sprites.json'
 	// 	})
-	// }
-	// create() {
+
+	// https://rexrainbow.github.io/phaser3-rex-notes/docs/site/loader/#script
+	// scene.load.script(key, url);
+		this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js')
+ 	} // end preload()
+
+	create() {
 	// 	// x | y | what it is (key; name of file)
 
 	// 	// - - - image - - -
@@ -61,12 +66,63 @@ export default class Level1 extends Phaser.Scene {
 
 	// - - - SHAPES - - -
 	// https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shape-rectangle/
-		this.rectangle = this.add.rectangle(100, 300, 50, 50, 0xFF0000)
-		this.rectangle.setStrokeStyle(2, 0xFF0000, 1)
+		// this.rectangle = this.add.rectangle(100, 300, 50, 50, 0xFF0000)
+		// this.rectangle.setStrokeStyle(2, 0xFF0000, 1)
 
-		this.starry = this.add.star(100, 250, 5, 32, 64, 0xFFC0CB)
-		this.starry.setStrokeStyle(1, 0xFFC0CB, 1)
+		// this.starry = this.add.star(100, 250, 5, 32, 64, 0xFFC0CB)
+		// this.starry.setStrokeStyle(1, 0xFFC0CB, 1)
 
+		this.txtHere = this.add.text(300, 50, 'testing...', {
+	    fontFamily: 'Arial',
+	    fontSize: '64px',
+	    fontStyle: '',
+	    backgroundColor: null,
+	    color: '#00ff00',
+	    stroke: '#fff',
+	    strokeThickness: 0,
+	    shadow: {
+	        offsetX: 0,
+	        offsetY: 0,
+	        color: '#000',
+	        blur: 0,
+	        stroke: false,
+	        fill: false
+	    },
+	    align: 'left',  // 'left'|'center'|'right'
+	    maxLines: 0,
+	    fixedWidth: 0,
+	    fixedHeight: 0,
+	    rtl: false,
+	    testString: '|MÉqgy',
+	    wordWrap: {
+	        width: null,
+	        callback: null,
+	        callbackScope: null,
+	        useAdvancedWrap: false
+	    },
+	    // resolution: 1
+		})
+		WebFont.load({
+    google: {
+      families: ['Fredericka the Great']
+    }, 
+    active: () => {
+    	this.add
+    		.text(25, 150, `Using Google Fonts, w00t`, {
+    			fontFamily: 'Fredericka the Great',
+	    		fontSize: 50,
+	    		color: '#ffffff'
+    		})
+    		.setShadow(2, 2, '#333333', 2, false, true);
+    	}
+		});
+
+		// if we were to update txtHere, count for purpose of showing update
+		this.txtHere.setText('...')
+		this.count = 0;
+	} // end create()
+	update(time, delta) {
+		this.txtHere.setText('...' + this.count)
+		this.count +=1;
 	}
-	update(time, delta) {}
-}
+} // end export
